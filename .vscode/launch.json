@@ -8,13 +8,15 @@
       "type": "node",
       "request": "launch",
       "name": "NestJS Debug",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["run", "start:debug", "--inspect-brk"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:debug", "--", "--inspect-brk"],
       "console": "integratedTerminal",
       "restart": true,
       "program": "${workspaceFolder}/api/src/main.ts",
       //   "outFiles": ["${workspaceFolder}/**/*.js"]
-      "cwd": "${workspaceFolder}/api"
+      "cwd": "${workspaceFolder}/api",
+      "autoAttachChildProcesses": true,
+      "stopOnEntry": false
     }
   ]
 }

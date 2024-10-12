@@ -23,13 +23,13 @@ export class User {
   @Prop()
   image: string;
 
-  @Prop()
+  @Prop({ default: 'user' })
   role: string;
 
   @Prop()
   accountType: string;
 
-  @Prop()
+  @Prop({ default: true })
   isActive: boolean;
 
   @Prop()
