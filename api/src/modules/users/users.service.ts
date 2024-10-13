@@ -58,15 +58,30 @@ export class UsersService {
     };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.userModel
+      .findOne({ _id: id })
+      .select('-password')
+      .select('-__v');
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async findOneByEmail(email: string) {
+    return await this.userModel.findOne({ email });
+  }
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    // Remove null or undefined fields
+    // Object.keys(updateUserDto).forEach(
+    //   (key) => updateUserDto[key] == null && delete updateUserDto[key],
+    // );
+    return await this.userModel.updateOne({ _id: id }, { ...updateUserDto });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    // Check if the user exists then remove it
+    const user = await this.userModel.findOne({ _id: id });
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    return await this.userModel.deleteOne({ _id: id });
   }
 }

@@ -9,14 +9,15 @@
       "request": "launch",
       "name": "NestJS Debug",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start:debug", "--", "--inspect-brk"],
+      "runtimeArgs": ["run", "start:debug", "--", "--inspect"],
       "console": "integratedTerminal",
       "restart": true,
       "program": "${workspaceFolder}/api/src/main.ts",
-      //   "outFiles": ["${workspaceFolder}/**/*.js"]
       "cwd": "${workspaceFolder}/api",
+      "skipFiles": ["${workspaceFolder}/api/<node_internals>/**"],
+      "outFiles": ["${workspaceFolder}/api/dist/**/*.js"],
       "autoAttachChildProcesses": true,
-      "stopOnEntry": false
+      "stopOnEntry": false,
     }
   ]
 }
