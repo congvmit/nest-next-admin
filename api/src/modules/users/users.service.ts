@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindAllUserDto } from './dto/find-all-user.dto';
@@ -7,6 +7,9 @@ import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { hashPassword } from '@/helpers/utils';
 import { ApiTags } from '@nestjs/swagger';
+import { RegisterDto } from '@/auth/dto/register.dto';
+import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 
 @ApiTags('Users')
 @Injectable()
@@ -85,5 +88,26 @@ export class UsersService {
       throw new BadRequestException('User not found');
     }
     return await this.userModel.deleteOne({ _id: id });
+  }
+
+  async register(registerDto: RegisterDto) {
+    const { email, password, name } = registerDto;
+
+    if (await this.isEmailExist(email)) {
+      throw new BadRequestException(['Email already exists']);
+    }
+
+    const hashedPassword = await hashPassword(password);
+    const user = await this.userModel.create({
+      name: name,
+      email: email,
+      password: hashedPassword,
+      codeId: uuidv4(),
+      codeExpired: dayjs().add(1, 'day').toDate(),
+    });
+
+    return {
+      _id: user._id,
+    };
   }
 }
