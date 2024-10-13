@@ -6,7 +6,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { hashPassword } from '@/helpers/utils';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
