@@ -1,12 +1,10 @@
-'use client'
+"use client";
 
-import React from 'react';
-import SignUpForm from '@/components/auth/signup';
+import React from "react";
+import SignUpForm from "@/components/auth/signup";
 
 const SignUpPage = () => {
-    return (
-        <SignUpForm />
-    );
+  return <SignUpForm />;
 };
 
 export default SignUpPage;

@@ -20,7 +20,7 @@ const AdminSideBar = () => {
   const items: MenuItem[] = [
     {
       key: "grp",
-      label: "My App",
+      label: "Hỏi Dân IT",
       type: "group",
       children: [
         {

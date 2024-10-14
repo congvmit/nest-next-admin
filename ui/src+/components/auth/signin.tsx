@@ -1,27 +1,10 @@
 "use client";
-
-import React from "react";
-import type { FormProps } from "antd";
-import { Button, Checkbox, Col, Divider, Form, Input, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 
-const SignInForm = () => {
-  type FieldType = {
-    email?: string;
-    password?: string;
-    remember?: string;
-  };
-
-  const onFinish: FormProps<FieldType>["onFinish"] = async (values: any) => {
-    console.log("Success:", values);
-  };
-
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
-    errorInfo,
-  ) => {
-    console.log("Failed:", errorInfo);
-  };
+const Login = () => {
+  const onFinish = async (values: any) => {};
 
   return (
     <Row justify={"center"} style={{ marginTop: "30px" }}>
@@ -34,39 +17,37 @@ const SignInForm = () => {
             borderRadius: "5px",
           }}
         >
-          <legend style={{ fontSize: "24px", fontWeight: "bold" }}>
-            Sign In
-          </legend>
+          <legend>Đăng Nhập</legend>
           <Form
             name="basic"
-            layout="vertical"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
+            layout="vertical"
           >
-            <Form.Item<FieldType>
+            <Form.Item
               label="Email"
               name="email"
               rules={[
-                { required: true, message: "Please input your email!" },
-                { type: "email", message: "The email is not valid!" },
+                {
+                  required: true,
+                  message: "Please input your email!",
+                },
               ]}
             >
               <Input />
             </Form.Item>
 
-            <Form.Item<FieldType>
+            <Form.Item
               label="Password"
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
               ]}
             >
               <Input.Password />
-            </Form.Item>
-
-            <Form.Item<FieldType> name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
             <Form.Item>
@@ -89,4 +70,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default Login;

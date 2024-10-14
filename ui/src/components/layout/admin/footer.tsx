@@ -1,3 +1,5 @@
+"use client";
+
 import { Footer } from "antd/es/layout/layout";
 
 const AdminFooter = () => {
