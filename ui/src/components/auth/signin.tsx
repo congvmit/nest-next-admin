@@ -5,6 +5,9 @@ import type { FormProps } from "antd";
 import { Button, Checkbox, Col, Divider, Form, Input, Row } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
   type FieldType = {
@@ -13,8 +16,29 @@ const SignInForm = () => {
     remember?: string;
   };
 
+  const router = useRouter();
+
   const onFinish: FormProps<FieldType>["onFinish"] = async (values: any) => {
-    console.log("Success:", values);
+    const { email, password } = values;
+    const result = await signIn("credentials", {
+      redirect: false,
+      callbackUrl: "/dashboard",
+      email,
+      password,
+    });
+    console.log(">> go here");
+
+    if (result?.code === "invalid_credentials") {
+      toast.error("Email or password is incorrect!");
+    }
+    else if (result?.code === "inactive_account") {
+      toast.error("Account is inactive!");
+    }
+    else {
+      toast.success("Sign In success!");
+      router.push("/dashboard");
+    }
+
   };
 
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
@@ -47,6 +71,8 @@ const SignInForm = () => {
             <Form.Item<FieldType>
               label="Email"
               name="email"
+              // add default value for testing
+              initialValue={"hello-world1@example.com"}
               rules={[
                 { required: true, message: "Please input your email!" },
                 { type: "email", message: "The email is not valid!" },
@@ -58,6 +84,7 @@ const SignInForm = () => {
             <Form.Item<FieldType>
               label="Password"
               name="password"
+              initialValue={"12345"}
               rules={[
                 { required: true, message: "Please input your password!" },
               ]}
@@ -76,12 +103,12 @@ const SignInForm = () => {
             </Form.Item>
           </Form>
           <Link href={"/"}>
-            <ArrowLeftOutlined /> Quay lại trang chủ
+            <ArrowLeftOutlined /> Back to home
           </Link>
           <Divider />
           <div style={{ textAlign: "center" }}>
-            Chưa có tài khoản?{" "}
-            <Link href={"/auth/register"}>Đăng ký tại đây</Link>
+            Do not have an account?{" "}
+            <Link href={"/auth/register"}>Sign Up here!</Link>
           </div>
         </fieldset>
       </Col>

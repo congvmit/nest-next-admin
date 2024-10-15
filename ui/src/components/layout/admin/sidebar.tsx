@@ -8,7 +8,7 @@ import {
   TeamOutlined,
 } from "@ant-design/icons";
 import React, { useContext } from "react";
-import { AdminContext } from "@/library/admin.context";
+import { AdminContext } from "@/providers/admin.provider";
 import type { MenuProps } from "antd";
 import Link from "next/link";
 

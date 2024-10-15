@@ -1,3 +1,6 @@
+
+'use client';
+
 const AuthPage = () => {
   return (
     <div>

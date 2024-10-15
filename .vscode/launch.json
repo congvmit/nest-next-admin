@@ -17,7 +17,20 @@
       "skipFiles": ["${workspaceFolder}/api/<node_internals>/**"],
       "outFiles": ["${workspaceFolder}/api/dist/**/*.js"],
       "autoAttachChildProcesses": true,
-      "stopOnEntry": false,
+      "stopOnEntry": false
+    },
+    {
+      "name": "Next.js Debug",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn run dev",
+      "cwd": "${workspaceFolder}/ui",
+      "serverReadyAction": {
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      },
+      "autoAttachChildProcesses": true
     }
   ]
 }

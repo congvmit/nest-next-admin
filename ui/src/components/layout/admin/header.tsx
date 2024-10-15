@@ -1,16 +1,19 @@
 "use client";
 
-import { AdminContext } from "@/library/admin.context";
+import { AdminContext } from "@/providers/admin.provider";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout } from "antd";
 import { useContext } from "react";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Dropdown, Space } from "antd";
+import { useSession } from "next-auth/react";
 
 const AdminHeader = () => {
   const { Header } = Layout;
   const { collapseMenu, setCollapseMenu } = useContext(AdminContext)!;
+  const { data: session, status } = useSession();
+  console.log('session', session)
 
   const items: MenuProps["items"] = [
     {
@@ -90,7 +93,7 @@ const AdminHeader = () => {
             }}
           >
             <Space>
-              Welcome Admin
+              Welcome {session?.user?.name ?? "User"}
               <DownOutlined />
             </Space>
           </a>

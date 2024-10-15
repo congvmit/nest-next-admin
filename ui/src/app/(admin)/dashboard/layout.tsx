@@ -6,8 +6,8 @@ import AdminFooter from "@/components/layout/admin/footer";
 import AdminHeader from "@/components/layout/admin/header";
 import AdminSidebar from "@/components/layout/admin/sidebar";
 import AdminContent from "@/components/layout/admin/content";
-
-import { AdminContextProvider } from "@/library/admin.context";
+import { AdminContextProvider } from "@/providers/admin.provider";
+import { useSession } from "next-auth/react";
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

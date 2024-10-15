@@ -20,8 +20,14 @@ export class AuthService {
   }
 
   async signIn(user: any) {
+    console.log('user', user);
     const payload = { email: user.email, sub: user._id };
     return {
+      user: {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+      },
       access_token: await this.jwtService.signAsync(payload),
     };
   }
@@ -29,22 +35,4 @@ export class AuthService {
   async register(registerDto: RegisterDto) {
     return await this.usersService.register(registerDto);
   }
-
-  // Old code
-  // async signIn(email: string, password: string): Promise<any> {
-  //   const user = await this.usersService.findOneByEmail(email);
-  //   if (!user) {
-  //     throw new UnauthorizedException('Invalid email or password');
-  //   }
-  //   const isPasswordMatch = await comparePassword(password, user.password);
-  //   if (!isPasswordMatch) {
-  //     throw new UnauthorizedException('Invalid email or password');
-  //   }
-
-  //   const payload = { email: user.email, sub: user._id };
-
-  //   return {
-  //     access_token: await this.jwtService.signAsync(payload),
-  //   };
-  // }
 }

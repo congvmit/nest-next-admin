@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/app/globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import ToastProvider from "@/providers/toast.provider";
+import 'react-toastify/dist/ReactToastify.css';
+import NextAuthProvider from "@/providers/next-auth.provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,12 +25,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
+
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <AntdRegistry>{children}</AntdRegistry>
+        <AntdRegistry>
+          <NextAuthProvider>
+            <ToastProvider>
+              {children}
+            </ToastProvider>
+          </NextAuthProvider>
+        </AntdRegistry>
       </body>
     </html>
   );

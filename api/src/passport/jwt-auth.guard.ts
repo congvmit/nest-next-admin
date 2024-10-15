@@ -1,4 +1,4 @@
-import { IS_PUBLIC_KEY } from '@/decorators/publi_metadata';
+import { IS_PUBLIC_KEY } from '@/decorators/metadata';
 import {
   ExecutionContext,
   Injectable,

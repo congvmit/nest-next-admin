@@ -2,6 +2,16 @@ export {};
 // https://bobbyhadz.com/blog/typescript-make-types-global#declare-global-types-in-typescript
 
 declare global {
+  
+  interface ILogin {
+    user: {
+      _id: string;
+      name: string;
+      email: string;
+    };
+    access_token: string;
+  }
+
   interface IRequest {
     url: string;
     method: string;

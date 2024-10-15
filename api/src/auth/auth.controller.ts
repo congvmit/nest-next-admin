@@ -5,7 +5,7 @@ import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { UserSigninDto } from './dto/signin.dto';
 import { LocalAuthGuard } from '@/passport/local-auth.guard';
 import { JwtAuthGuard } from '@/passport/jwt-auth.guard';
-import { Public } from '@/decorators/publi_metadata';
+import { Public, ResponseMessage } from '@/decorators/metadata';
 import { UsersService } from '@/modules/users/users.service';
 import { RegisterDto } from './dto/register.dto';
 
@@ -14,15 +14,10 @@ import { RegisterDto } from './dto/register.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  // Old code
-  // @Post('signin')
-  // async signIn(@Body() createAuthDto: CreateAuthDto) {
-  //   return await this.authService.signIn(createAuthDto.email, createAuthDto.password);
-  // }
-
   @UseGuards(LocalAuthGuard)
   @Post('signin')
   @Public()
+  @ResponseMessage('Sign in successfully')
   @ApiBody({ type: UserSigninDto })
   async signIn(@Request() req) {
     return await this.authService.signIn(req.user);
