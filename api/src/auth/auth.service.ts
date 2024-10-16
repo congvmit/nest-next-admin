@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   async signIn(user: any) {
-    console.log('user', user);
     const payload = { email: user.email, sub: user._id };
     return {
       user: {
@@ -32,7 +31,7 @@ export class AuthService {
     };
   }
 
-  async register(registerDto: RegisterDto) {
+  async signUp(registerDto: RegisterDto) {
     return await this.usersService.register(registerDto);
   }
 }

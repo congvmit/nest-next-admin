@@ -14,9 +14,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials: any) => {
-        let result = await sendRequest<IBackendRes<ILogin>>({
+        let result = await sendRequest<IBackendRes<ISignIn>>({
           method: "POST",
-          url: "http://localhost:8081/api/v1/auth/signin",
+          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/signin`,
           body: {
             email: credentials.email,
             password: credentials.password,
@@ -52,21 +52,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       (session.user as IUser) = token.user;
       return session;
-    }
+    },
     // authorized: async ({ auth }) => {
     //   // Logged in users are authenticated, otherwise redirect to login page
     //   return !!auth;
-    // },
-    // async authorized({ request, auth }) {
-    //   const token = auth?.user?.access_token;
-    //   const pathname = request.url;
-    //   console.log("pathname ", pathname);
-
-    //   if (token) return true;
-    //   // if (pathname === "http://localhost:3000/api/login") return true;
-    //   if (pathname.endsWith("/api/login")) return true;
-
-    //   return false;
     // },
   },
 });

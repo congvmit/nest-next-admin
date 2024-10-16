@@ -94,7 +94,7 @@ export class UsersService {
     const { email, password, name } = registerDto;
 
     if (await this.isEmailExist(email)) {
-      throw new BadRequestException(['Email already exists']);
+      throw new BadRequestException('Email already exists');
     }
 
     const hashedPassword = await hashPassword(password);

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import React from "react";
 import { Layout } from "antd";
@@ -7,9 +7,12 @@ import AdminHeader from "@/components/layout/admin/header";
 import AdminSidebar from "@/components/layout/admin/sidebar";
 import AdminContent from "@/components/layout/admin/content";
 import { AdminContextProvider } from "@/providers/admin.provider";
-import { useSession } from "next-auth/react";
+import { auth } from "@/auth";
 
-const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AdminLayout: React.FC<{ children: React.ReactNode }> = async ({
+  children,
+}) => {
+  const session = await auth();
   return (
     <AdminContextProvider>
       <div style={{ display: "flex" }}>
@@ -17,7 +20,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <AdminSidebar />
         </div>
         <div className="right-side" style={{ flex: 1 }}>
-          <AdminHeader />
+          <AdminHeader session={session} />
           <AdminContent>{children}</AdminContent>
           <AdminFooter />
         </div>

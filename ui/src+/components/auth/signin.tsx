@@ -62,7 +62,7 @@ const Login = () => {
           <Divider />
           <div style={{ textAlign: "center" }}>
             Chưa có tài khoản?{" "}
-            <Link href={"/auth/register"}>Đăng ký tại đây</Link>
+            <Link href={"/auth/signup"}>Đăng ký tại đây</Link>
           </div>
         </fieldset>
       </Col>

@@ -28,9 +28,9 @@ export class AuthController {
     return req.user;
   }
 
-  @Post('register')
+  @Post('signup')
   @Public()
   async register(@Body() registerDto: RegisterDto) {
-    return await this.authService.register(registerDto);
+    return await this.authService.signUp(registerDto);
   }
 }

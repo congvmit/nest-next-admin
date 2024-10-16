@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "@/app/globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import ToastProvider from "@/providers/toast.provider";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import NextAuthProvider from "@/providers/next-auth.provider";
 
 const geistSans = localFont({
@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-
   children: React.ReactNode;
 }>) {
   return (
@@ -33,9 +32,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AntdRegistry>
           <NextAuthProvider>
-            <ToastProvider>
-              {children}
-            </ToastProvider>
+            <ToastProvider>{children}</ToastProvider>
           </NextAuthProvider>
         </AntdRegistry>
       </body>

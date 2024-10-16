@@ -26,19 +26,15 @@ const SignInForm = () => {
       email,
       password,
     });
-    console.log(">> go here");
 
     if (result?.code === "invalid_credentials") {
       toast.error("Email or password is incorrect!");
-    }
-    else if (result?.code === "inactive_account") {
+    } else if (result?.code === "inactive_account") {
       toast.error("Account is inactive!");
-    }
-    else {
+    } else {
       toast.success("Sign In success!");
       router.push("/dashboard");
     }
-
   };
 
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
@@ -108,7 +104,7 @@ const SignInForm = () => {
           <Divider />
           <div style={{ textAlign: "center" }}>
             Do not have an account?{" "}
-            <Link href={"/auth/register"}>Sign Up here!</Link>
+            <Link href={"/auth/signup"}>Sign Up here!</Link>
           </div>
         </fieldset>
       </Col>

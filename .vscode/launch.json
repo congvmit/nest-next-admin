@@ -25,6 +25,7 @@
       "request": "launch",
       "command": "yarn run dev",
       "cwd": "${workspaceFolder}/ui",
+      "outFiles": ["${workspaceFolder}/ui/dist/**/*.js"],
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
